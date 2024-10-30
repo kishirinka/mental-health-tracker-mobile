@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class MyHomePage extends StatelessWidget {
-  final String studentID = '5000000000';
-  final String name = 'Gedagedi Gedagedago';
-  final String className = 'PBP S';
+  final String studentID = '2306226864';
+  final String name = 'Irma Nia Alwijag';
+  final String className = 'PBP B';
 
   MyHomePage({super.key});
 
