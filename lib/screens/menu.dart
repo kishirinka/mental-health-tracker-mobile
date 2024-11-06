@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:mental_health_tracker/widgets/left_drawer.dart';
+import 'package:mental_health_tracker/screens/moodentry_form.dart'; 
+import 'package:mental_health_tracker/widgets/mood_card.dart'; 
 
 class MyHomePage extends StatelessWidget {
   final String studentID = '2306226864';
-  final String name = 'Irma Nia Alwijag';
+  final String name = 'Irma Nia Alwijah';
   final String className = 'PBP B';
 
   MyHomePage({super.key});
@@ -25,7 +28,9 @@ class MyHomePage extends StatelessWidget {
           ),
         ),
         backgroundColor: Theme.of(context).colorScheme.primary,
+        iconTheme: const IconThemeData(color: Colors.white),
       ),
+      drawer: const LeftDrawer(),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -60,7 +65,24 @@ class MyHomePage extends StatelessWidget {
                     mainAxisSpacing: 10,
                     crossAxisCount: 3,
                     shrinkWrap: true,
-                    children: items.map((item) => ItemCard(item: item)).toList(),
+                    children: items
+                        .map((item) => ItemCard(item: item, onTap: () {
+                              if (item.name == "Lihat Mood") {
+                                // Navigasi ke halaman Lihat Mood, tambahkan jika tersedia
+                              } else if (item.name == "Tambah Mood") {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const MoodEntryFormPage(),
+                                  ),
+                                );
+                              } else if (item.name == "Logout") {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(content: Text("Logout successful")),
+                                );
+                              }
+                            }))
+                        .toList(),
                   ),
                 ],
               ),
@@ -100,56 +122,3 @@ class InfoCard extends StatelessWidget {
   }
 }
 
-class ItemHomepage {
-  final String name;
-  final IconData icon;
-
-  ItemHomepage(this.name, this.icon);
-}
-
-class ItemCard extends StatelessWidget {
-  final ItemHomepage item;
-
-  const ItemCard({super.key, required this.item});
-
-  @override
-  Widget build(BuildContext context) {
-    return Material(
-      color: Theme.of(context).colorScheme.secondary,
-      borderRadius: BorderRadius.circular(12),
-      child: InkWell(
-        onTap: () {
-          ScaffoldMessenger.of(context)
-            ..hideCurrentSnackBar()
-            ..showSnackBar(
-              SnackBar(content: Text("You tapped ${item.name}!")),
-            );
-        },
-        child: Container(
-          padding: const EdgeInsets.all(6), // Reduced padding for smaller button
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  item.icon,
-                  color: Colors.white,
-                  size: 24.0, // Reduced icon size
-                ),
-                const SizedBox(height: 3),
-                Text(
-                  item.name,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 12.0, // Reduced font size
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
