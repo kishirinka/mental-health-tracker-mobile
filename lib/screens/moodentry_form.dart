@@ -119,7 +119,7 @@ class _MoodEntryFormPageState extends State<MoodEntryFormPage> {
                       backgroundColor: MaterialStateProperty.all(
                           Theme.of(context).colorScheme.primary),
                     ),
-                    onPressed: () {
+                    onPressed: () async {
                       if (_formKey.currentState!.validate()) {
                          final response = await request.postJson(
                               "http://localhost:8000/create-flutter/",
