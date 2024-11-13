@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mental_health_tracker/widgets/left_drawer.dart';
 import 'package:mental_health_tracker/screens/moodentry_form.dart'; 
 import 'package:mental_health_tracker/widgets/mood_card.dart'; 
+import 'package:mental_health_tracker/screens/list_modentry.dart';
 
 class MyHomePage extends StatelessWidget {
   final String studentID = '2306226864';
@@ -68,6 +69,11 @@ class MyHomePage extends StatelessWidget {
                     children: items
                         .map((item) => ItemCard(item: item, onTap: () {
                               if (item.name == "Lihat Mood") {
+                                Navigator.push(context,
+                                    MaterialPageRoute(
+                                        builder: (context) => const MoodEntryPage()
+                                    ),
+                                );
                                 // Navigasi ke halaman Lihat Mood, tambahkan jika tersedia
                               } else if (item.name == "Tambah Mood") {
                                 Navigator.push(
